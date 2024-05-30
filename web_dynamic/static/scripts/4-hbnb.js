@@ -55,14 +55,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Initial fetch for all places
   fetchPlaces();
 
-  // Add event listener to the button
-  document.querySelector('button').addEventListener('click', () => {
-    const selectedAmenities = [];
-    document.querySelectorAll('.amenities input:checked').forEach(checkbox => {
-      selectedAmenities.push(checkbox.dataset.id);
-    });
+ const amenityCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+  const filterButton = document.createElement('button');
+  filterButton.innerText = 'Filter';
+  document.querySelector('section.filters').appendChild(filterButton);
 
-    const postData = { amenities: selectedAmenities };
-    fetchPlaces(postData);
+  filterButton.addEventListener('click', () => {
+      const amenities = [];
+      amenityCheckboxes.forEach((checkbox) => {
+          if (checkbox.checked) {
+              amenities.push(checkbox.getAttribute('data-id'));
+          }
+      });
+      fetchPlaces({ amenities: amenities });
   });
 });
