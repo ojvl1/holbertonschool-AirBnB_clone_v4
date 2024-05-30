@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
 import sys
-sys.path.append('/Users/osvaldoantompietri/AirBnB_clone_v4/web_dynamic')
+sys.path.append('/Users/osvaldoantompietri/AirBnB_clone_v4')
 from models import storage
 from models.state import State
 from models.city import City
