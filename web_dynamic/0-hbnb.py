@@ -1,27 +1,30 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
+
+# Import necessary modules
 import sys
-sys.path.append('/Users/osvaldoantompietri/holbertonschool-AirBnB_clone_v4')
+sys.path.append('/home/emmanuel/holbertonschool-AirBnB_clone_v4')
+import os
+import sys
 from models import storage
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
-from os import environ
 from flask import Flask, render_template
-from uuid import uuid4
+import uuid
+
+# Create Flask app instance
 app = Flask(__name__)
-# app.jinja_env.trim_blocks = True
-# app.jinja_env.lstrip_blocks = True
 
-
+# Define teardown_appcontext handler
 @app.teardown_appcontext
 def close_db(error):
     """ Remove the current SQLAlchemy Session """
     storage.close()
 
-
-@app.route('/0-hbnb/', strict_slashes=False)
+# Define route for /0-hbnb
+@app.route('/0-hbnb', strict_slashes=False)
 def hbnb():
     """ HBNB is alive! """
     states = storage.all(State).values()
@@ -41,9 +44,8 @@ def hbnb():
                            states=st_ct,
                            amenities=amenities,
                            places=places,
-                           cache_id=uuid4())
+                           cache_id=uuid.uuid4())
 
-
+# Main function
 if __name__ == "__main__":
-    """ Main Function """
     app.run(host='0.0.0.0', port=5000)
