@@ -1,4 +1,4 @@
-i#!/usr/bin/python3
+#!/usr/bin/python3
 """ Starts a Flash Web Application """
 import sys
 sys.path.append('/home/millieny/holbertonschool-AirBnB_clone_v4')
